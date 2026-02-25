@@ -27,8 +27,6 @@ def check_url_type(url):
     except requests.exceptions.RequestException as e:
         return "error", url
 
-# Removed legacy function check_if_url_exists
-
 def process_missing_schema_url(bot, message, original_url, loading_msg, engine, handle_inactive_url, format_analysis_result):
     """Handles scenarios where a user sends a URL missing its 'http(s)://' scheme."""
     urls_to_scan = [f"http://{original_url}", f"https://{original_url}"]

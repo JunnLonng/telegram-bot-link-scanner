@@ -111,7 +111,6 @@ class SecurityEngine:
                 vt_failed = True
                 
             # --- URLSCAN.IO CHECK ---
-            # Don't bother scanning if VT already proved it's purely malicious
             if self.urlscan_api_key and not global_malicious_flag:
                 for u in urls_to_check:
                     is_malicious, urlscan_msg = check_urlscan_io(u, self.urlscan_api_key)
@@ -170,7 +169,6 @@ class SecurityEngine:
         """Resolves redirects."""
         try:
             resp = requests.head(url, allow_redirects=True, timeout=5)
-            # if the target is unreachable with HEAD, try GET
             if resp.status_code >= 400:
                  resp = requests.get(url, allow_redirects=True, timeout=5)
             return resp.url
